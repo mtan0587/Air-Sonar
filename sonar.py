@@ -12,6 +12,8 @@ Inspired by:
 Usage:
     python sonar.py              # runs both pure-tone and chirp experiments
     python sonar.py --list       # list available audio devices
+
+    test
 """
 
 import argparse
