@@ -1,0 +1,14 @@
+# Scratch files
+committed_nb.json
+list_devices.py
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environment
+.venv/

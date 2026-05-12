@@ -9,11 +9,15 @@ Inspired by:
     https://github.com/alexwal/EE123-Labs/blob/master/Lab1A_Laptop_Sonar.ipynb
   - ELEC3305 Time-Domain Sonar Lab, University of Sydney
 
-Usage:
-    python sonar.py              # runs both pure-tone and chirp experiments
-    python sonar.py --list       # list available audio devices
+HOW TO RUN:
+  Step 1 — find your device numbers:
+      python sonar.py --list
 
-    test
+  Step 2 — run with your mic and speaker device numbers:
+      python sonar.py --in-dev YOUR_in_dev --out-dev YOUR_out_dev
+
+  Example:
+      python sonar.py --in-dev 12 --out-dev 10
 """
 
 import argparse
@@ -28,8 +32,8 @@ import pyaudio
 
 # ── Default parameters ────────────────────────────────────────────────────────
 FS      = 48000   # sampling rate (Hz)
-IN_DEV  = 9       # mic device index   (Intel Smart Sound — run --list to find yours)
-OUT_DEV = 8       # speaker device idx (Realtek          — run --list to find yours)
+IN_DEV  = 12      # mic device index   (Intel Smart Sound, 48kHz, 2ch)
+OUT_DEV = 10      # speaker device idx (Speaker Realtek, 48kHz)
 
 F0      = 6000    # chirp start frequency (Hz)
 F1      = 12000   # chirp end frequency   (Hz)  → BW = 6 kHz
@@ -114,7 +118,8 @@ def _play_audio(Q, p, fs, dev=None):
 
 def _record_audio(q, p, fs, dev=None, chunk=2048, lock=None):
     ctx = lock if lock is not None else _NullCtx()
-    stream = p.open(format=pyaudio.paFloat32, channels=1, rate=int(fs),
+    # All input devices on this system require channels=2; keep left channel only
+    stream = p.open(format=pyaudio.paFloat32, channels=2, rate=int(fs),
                     input=True, input_device_index=dev, frames_per_buffer=chunk)
     while True:
         try:
@@ -122,7 +127,7 @@ def _record_audio(q, p, fs, dev=None, chunk=2048, lock=None):
                 raw = stream.read(chunk, exception_on_overflow=False)
         except Exception:
             break
-        q.put(np.frombuffer(raw, dtype=np.float32))
+        q.put(np.frombuffer(raw, dtype=np.float32)[::2])
 
 
 def xciever(sig, fs, in_dev=None, out_dev=None):
