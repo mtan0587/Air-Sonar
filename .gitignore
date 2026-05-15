@@ -4,6 +4,7 @@ list_devices.py
 sounddevice_test.py
 sonar.py
 CLAUDE.md
+.claude/
 
 # Python
 __pycache__/
