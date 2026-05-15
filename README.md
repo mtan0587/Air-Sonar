@@ -89,7 +89,7 @@ $$X_{rcv}[n] = (r \star x_a)[n] = \sum_k r[k]\, x_a^*[k - n]$$
 
 Implemented as FFT-domain convolution using `scipy.signal.fftconvolve`:
 
-$$X_{rcv} = \mathcal{F}^{-1}\!\lbrace\{\mathcal{F}\{r\} \cdot \overline{\mathcal{F}\{x_a\}}\right\}$$
+$$X_{rcv} = \mathcal{F}^{-1}\!\lbrace\{\mathcal{F}\{r\} \cdot \overline{\mathcal{F}\{x_a\}}\rbrace\}$$
 
 The matched filter maximises the output SNR when the noise is white and Gaussian.  
 **Reference:** Oppenheim & Schafer, §8.7 — *Linear Filtering Methods Based on the DFT*; efficient convolution via the DFT. Ch. 9 — *Computation of the Discrete Fourier Transform* (FFT algorithms).
