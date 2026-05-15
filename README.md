@@ -191,7 +191,18 @@ pip install numpy scipy sounddevice matplotlib Pillow ipywidgets notebook
 
 ## Hardware Setup
 
-- **Disable all audio enhancements** on both the microphone and speaker in Windows Sound Settings (Recording → Properties → Enhancements → Disable all). Noise suppression and automatic gain control will gate out the echo signal.
+### Development Machine
+- **Laptop:** HP Victus 15 (RTX 4050)
+- **OS:** Windows 11 Home
+- **Audio chip:** Realtek High Definition Audio (integrated)
+- **Speaker:** Built-in stereo speakers
+- **Microphone:** Built-in integrated laptop microphone
+- **Sounddevice indices used:** `YOUR_in_dev = 1` (microphone), `YOUR_out_dev = 3` (speakers)
+
+To confirm device indices on your own machine, run the device selection cell in either notebook and match the printed device list to your hardware.
+
+### General Setup Notes
+- **Disable all audio enhancements** on both the microphone and speaker in Windows Sound Settings (Recording → Properties → Enhancements → Disable all). Noise suppression and automatic gain control will gate out the echo signal and produce a sparse, near-zero received waveform.
 - Set speaker volume to **70–80%** to avoid clipping distortion.
 - Place the speaker and microphone as close together as possible.
 - Run in a **quiet environment** — room reverberation adds clutter to the waterfall.
