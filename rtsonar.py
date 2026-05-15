@@ -217,4 +217,3 @@ def rtsonar( f0, f1, fs, Npulse, Nseg, Nrep, Nplot, maxdist, temperature, functi
 
     return stop_flag
     
-
