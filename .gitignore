@@ -2,6 +2,7 @@
 committed_nb.json
 list_devices.py
 sounddevice_test.py
+sonar.py
 
 # Python
 __pycache__/
